@@ -9,7 +9,25 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include <iostream>
+#include <fbxsdk.h>
+
 int main(int argc, char * argv[]) {
+
+	// Create an instance of the FBX SDK manager
+	FbxManager* lSdkManager = FbxManager::Create();
+
+	if (lSdkManager) {
+		std::cout << "FBX SDK initialized successfully." << std::endl;
+
+		// Destroy the FBX SDK manager
+		lSdkManager->Destroy();
+	}
+	else {
+		std::cout << "Failed to initialize FBX SDK." << std::endl;
+	}
+
+
 
     // Load GLFW and Create a Window
     glfwInit();
