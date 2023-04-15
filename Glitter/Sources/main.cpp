@@ -12,6 +12,10 @@
 #include <iostream>
 #include <fbxsdk.h>
 
+#include "imgui.h"
+#include "backends/imgui_impl_glfw.h"
+#include "backends/imgui_impl_opengl3.h"
+
 int main(int argc, char * argv[]) {
 
 	// Create an instance of the FBX SDK manager
@@ -26,7 +30,6 @@ int main(int argc, char * argv[]) {
 	else {
 		std::cout << "Failed to initialize FBX SDK." << std::endl;
 	}
-
 
 
     // Load GLFW and Create a Window
@@ -57,6 +60,7 @@ int main(int argc, char * argv[]) {
         // Background Fill Color
         glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
 
         // Flip Buffers and Draw
         glfwSwapBuffers(mWindow);
