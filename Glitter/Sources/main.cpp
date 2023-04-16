@@ -11,12 +11,30 @@
 
 #include <iostream>
 #include <fbxsdk.h>
+#include <nfd.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "imgui.h"
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
 int main(int argc, char * argv[]) {
+    // test to see if nfd is working:
+	nfdchar_t* outPath = NULL;
+	nfdresult_t result = NFD_OpenDialog(NULL, NULL, &outPath);
+
+	if (result == NFD_OKAY) {
+		puts("Success!");
+		puts(outPath);
+		free(outPath);
+	}
+	else if (result == NFD_CANCEL) {
+		puts("User pressed cancel.");
+	}
+	else {
+		printf("Error: %s\n", NFD_GetError());
+	}
 
 	// Create an instance of the FBX SDK manager
 	FbxManager* lSdkManager = FbxManager::Create();

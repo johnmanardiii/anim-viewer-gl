@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0)
-project(Glitter)
+project(anim-viewer-gl)
 
 option(GLFW_BUILD_DOCS OFF)
 option(GLFW_BUILD_EXAMPLES OFF)
@@ -10,6 +10,8 @@ option(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
 option(ASSIMP_BUILD_SAMPLES OFF)
 option(ASSIMP_BUILD_TESTS OFF)
 add_subdirectory(Glitter/Vendor/assimp)
+
+add_subdirectory(Glitter/Vendor/nativefiledialog)
 
 set(FBX_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Glitter/Vendor/fbx/lib)
 
@@ -29,7 +31,8 @@ include_directories(Glitter/Headers/
                     Glitter/Vendor/glm/
                     Glitter/Vendor/stb/
 					Glitter/Vendor/fbx/include/
-					Glitter/Vendor/imgui/)
+					Glitter/Vendor/imgui/
+					Glitter/Vendor/nativefiledialog/src/include/)
 
 file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
@@ -57,11 +60,14 @@ add_definitions(-DGLFW_INCLUDE_NONE
 add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
                                ${PROJECT_SHADERS} ${PROJECT_CONFIGS}
                                ${VENDORS_SOURCES} ${IMGUI_SOURCES} ${IMGUI_IMPL_SOURCES})
+							   
+
 target_link_libraries(${PROJECT_NAME} assimp glfw
                       ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
 					  ${FBX_DIR}/libfbxsdk-md.lib
 					  ${FBX_DIR}/libxml2-md.lib
-					  ${FBX_DIR}/zlib-md.lib)
+					  ${FBX_DIR}/zlib-md.lib
+					  nativefiledialog)
 set_target_properties(${PROJECT_NAME} PROPERTIES
     RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${PROJECT_NAME})
 

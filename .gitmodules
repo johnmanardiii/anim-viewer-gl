@@ -25,3 +25,9 @@
 [submodule "Glitter/Vendor/imgui"]
 	path = Glitter/Vendor/imgui
 	url = https://github.com/ocornut/imgui.git
+[submodule "Glitter/Vendor/nativefiledialog"]
+	path = Glitter/Vendor/nativefiledialog
+	url = https://github.com/mlabbe/nativefiledialog.git
+[submodule "Glitter/Vendor/nativefiledialog-cmake"]
+	path = Glitter/Vendor/nativefiledialog-cmake
+	url = https://github.com/aarcangeli/nativefiledialog-cmake.git
