@@ -11,7 +11,7 @@ option(ASSIMP_BUILD_SAMPLES OFF)
 option(ASSIMP_BUILD_TESTS OFF)
 add_subdirectory(Glitter/Vendor/assimp)
 
-add_subdirectory(Glitter/Vendor/nativefiledialog)
+add_subdirectory(Glitter/Vendor/nativefiledialog-cmake)
 
 set(FBX_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Glitter/Vendor/fbx/lib)
 
@@ -32,7 +32,7 @@ include_directories(Glitter/Headers/
                     Glitter/Vendor/stb/
 					Glitter/Vendor/fbx/include/
 					Glitter/Vendor/imgui/
-					Glitter/Vendor/nativefiledialog/src/include/)
+					Glitter/Vendor/nativefiledialog-cmake/src/include/)
 
 file(GLOB VENDORS_SOURCES Glitter/Vendor/glad/src/glad.c)
 file(GLOB PROJECT_HEADERS Glitter/Headers/*.hpp)
