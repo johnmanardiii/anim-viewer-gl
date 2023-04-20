@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct GLFWwindow;
 
 class AnimViewerGUI
@@ -10,5 +12,9 @@ public:
 
 	void DrawAnimViewerGUI();
 private:
+	void DrawMainMenuBar();
+	std::string OpenFileDialogue();
+
 	GLFWwindow* m_glfwWindow;
+	bool b_openImportWindow;
 };
