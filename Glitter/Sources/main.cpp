@@ -2,15 +2,7 @@
 #include "glitter.hpp"
 #include "Window.hpp"
 #include "AnimViewerGUI.hpp"
-
-// Standard Headers
-#include <cstdio>
-#include <cstdlib>
-
-#include <iostream>
-#include <fbxsdk.h>
-#include <nfd.h>
-#include <stdlib.h>
+#include "FbxLoader.hpp"
 
 int main(int argc, char * argv[]) {
     Window window = Window(mWidth, mHeight);
@@ -22,12 +14,20 @@ int main(int argc, char * argv[]) {
     // initialize IMGUI overlay:
     AnimViewerGUI gui = AnimViewerGUI(window.GetGLFWWindow());
 
+    FbxLoader fbxLoader = FbxLoader();
+
     // Rendering Loop
     while (!window.ShouldClose()) {
-        
-        // TODO: move this into a "renderer" class
-        glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        // process input
+
+        // update state
+
+        // process animation data
+
+        // render models with animation data
+		// TODO: move this into a "renderer" class
+		glClearColor(0.25f, 0.25f, 0.25f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT);
 		
         // draw GUI
         gui.DrawAnimViewerGUI();

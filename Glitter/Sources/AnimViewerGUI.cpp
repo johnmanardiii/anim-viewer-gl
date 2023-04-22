@@ -41,7 +41,7 @@ void AnimViewerGUI::DrawAnimViewerGUI()
 
 	// actual rendering of the GUI
 	DrawMainMenuBar();
-	ImGui::ShowDemoWindow();
+	// ImGui::ShowDemoWindow();	// This is for understanding ImGui
 
 	// render dear imgui onto screen
 	ImGui::Render();
@@ -77,7 +77,7 @@ std::string AnimViewerGUI::OpenFileDialogue()
 	std::string filePath;
 
 	nfdchar_t* outPath = NULL;
-	nfdresult_t result = NFD_OpenDialog(NULL, NULL, &outPath);
+	nfdresult_t result = NFD_OpenDialog("fbx", NULL, &outPath);
 
 	if (result == NFD_OKAY) {
 		filePath = std::string(outPath);

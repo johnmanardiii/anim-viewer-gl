@@ -6,11 +6,6 @@ option(GLFW_BUILD_EXAMPLES OFF)
 option(GLFW_BUILD_TESTS OFF)
 add_subdirectory(Glitter/Vendor/glfw)
 
-option(ASSIMP_BUILD_ASSIMP_TOOLS OFF)
-option(ASSIMP_BUILD_SAMPLES OFF)
-option(ASSIMP_BUILD_TESTS OFF)
-add_subdirectory(Glitter/Vendor/assimp)
-
 add_subdirectory(Glitter/Vendor/nativefiledialog-cmake)
 
 set(FBX_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Glitter/Vendor/fbx/lib)
@@ -25,7 +20,6 @@ else()
 endif()
 
 include_directories(Glitter/Headers/
-                    Glitter/Vendor/assimp/include/
                     Glitter/Vendor/glad/include/
                     Glitter/Vendor/glfw/include/
                     Glitter/Vendor/glm/
@@ -62,7 +56,7 @@ add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${PROJECT_HEADERS}
                                ${VENDORS_SOURCES} ${IMGUI_SOURCES} ${IMGUI_IMPL_SOURCES})
 							   
 
-target_link_libraries(${PROJECT_NAME} assimp glfw
+target_link_libraries(${PROJECT_NAME} glfw
                       ${GLFW_LIBRARIES} ${GLAD_LIBRARIES}
 					  ${FBX_DIR}/libfbxsdk-md.lib
 					  ${FBX_DIR}/libxml2-md.lib
