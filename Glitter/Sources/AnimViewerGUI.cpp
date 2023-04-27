@@ -68,7 +68,7 @@ void AnimViewerGUI::DrawMainMenuBar()
 		b_openImportWindow = false;
 		// open the dialog to open the fbx file:
 		std::string FBXPath = OpenFileDialogue();
-		std::cout << FBXPath << std::endl;
+		std::cout << "Opening Fbx: " <<  FBXPath << std::endl;
 	}
 }
 

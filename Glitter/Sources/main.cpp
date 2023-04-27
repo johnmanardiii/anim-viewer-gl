@@ -3,8 +3,13 @@
 #include "Window.hpp"
 #include "AnimViewerGUI.hpp"
 #include "FbxLoader.hpp"
+#include "IUpdatable.hpp"
+#include <vector>
 
-int main(int argc, char * argv[]) {
+int main() {
+    // create list of updatable objects
+    std::vector<IUpdatable*> updatables;
+
     Window window = Window(mWidth, mHeight);
     if (!window.IsValid())
     {
@@ -14,13 +19,19 @@ int main(int argc, char * argv[]) {
     // initialize IMGUI overlay:
     AnimViewerGUI gui = AnimViewerGUI(window.GetGLFWWindow());
 
-    FbxLoader fbxLoader = FbxLoader();
+    // Launch the fbx loader thread
+    FbxLoader fbxLoader{};
+    updatables.push_back(&fbxLoader);
 
     // Rendering Loop
     while (!window.ShouldClose()) {
         // process input
 
         // update state
+        for (auto updateable : updatables)
+        {
+            updateable->Update();
+        }
 
         // process animation data
 
