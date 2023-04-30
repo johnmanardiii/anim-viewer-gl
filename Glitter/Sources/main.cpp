@@ -23,6 +23,8 @@ int main() {
     FbxLoader fbxLoader{};
     updatables.push_back(&fbxLoader);
 
+    gui.SetFbxLoader(&fbxLoader);
+
     // Rendering Loop
     while (!window.ShouldClose()) {
         // process input

@@ -1,4 +1,5 @@
 #include "AnimViewerGUI.hpp"
+#include "FbxLoader.hpp"
 #include <GLFW/glfw3.h>
 #include <iostream>
 
@@ -68,7 +69,13 @@ void AnimViewerGUI::DrawMainMenuBar()
 		b_openImportWindow = false;
 		// open the dialog to open the fbx file:
 		std::string FBXPath = OpenFileDialogue();
-		std::cout << "Opening Fbx: " <<  FBXPath << std::endl;
+
+		// pass the fbxpath to the fbx loader
+		if (FBXPath != ""
+			&& m_fbxLoader)
+		{
+			m_fbxLoader->LoadFbx(FBXPath);
+		}
 	}
 }
 

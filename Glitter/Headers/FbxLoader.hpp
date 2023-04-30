@@ -5,6 +5,7 @@
 #include "IUpdatable.hpp"
 #include <memory>
 #include <thread>
+#include <mutex>
 
 #include "AnimatedModel.hpp"
 
