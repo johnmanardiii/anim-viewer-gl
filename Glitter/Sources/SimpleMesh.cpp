@@ -2,6 +2,7 @@
 #include <glad/glad.h>
 #include <iostream>
 #include "Camera.hpp"
+#include <glm/gtc/matrix_transform.hpp>
 
 SimpleMesh::SimpleMesh()
 {
@@ -40,6 +41,9 @@ SimpleMesh::SimpleMesh()
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+
+	position = glm::vec3(0.f);
+	rotation = glm::vec3(0.f);
 }
 
 SimpleMesh::~SimpleMesh()
@@ -50,10 +54,9 @@ SimpleMesh::~SimpleMesh()
 void SimpleMesh::Draw(Camera* camera)
 {
 	m_program->bind();
-	glm::mat4 M = glm::mat4(1.f);
 	glm::mat4 V = camera->GetV();
 	glm::mat4 P = camera->GetP();
-	glUniformMatrix4fv(m_program->getUniform("M"), 1, GL_FALSE, &M[0][0]);
+	glUniformMatrix4fv(m_program->getUniform("M"), 1, GL_FALSE, &m_ModelMatrix[0][0]);
 	glUniformMatrix4fv(m_program->getUniform("V"), 1, GL_FALSE, &V[0][0]);
 	glUniformMatrix4fv(m_program->getUniform("P"), 1, GL_FALSE, &P[0][0]);
 
@@ -66,5 +69,20 @@ void SimpleMesh::Draw(Camera* camera)
 
 void SimpleMesh::Update(float dt)
 {
+	static double time = 0.0f;
+	time += dt;
+	rotation.x += dt;
+	
+	m_ModelMatrix = glm::translate(glm::mat4(1.f), position);
+	m_ModelMatrix = glm::rotate(m_ModelMatrix, rotation.x, glm::vec3(1.f, 0.f, 0.f)) * m_ModelMatrix;
+}
 
+void SimpleMesh::SetPosition(glm::vec3 position)
+{
+	position = position;
+}
+
+void SimpleMesh::SetRotation(glm::vec3 rotation)
+{
+	rotation = rotation;
 }

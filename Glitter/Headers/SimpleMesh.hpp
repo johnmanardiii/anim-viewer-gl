@@ -15,7 +15,8 @@ public:
 	~SimpleMesh();
 	void Draw(Camera* camera);
 	void Update(float dt) override;
-
+	void SetPosition(glm::vec3 position);
+	void SetRotation(glm::vec3 rotation);
 private:
 	unsigned int m_VAO;
 	unsigned int m_VBO;
