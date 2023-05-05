@@ -14,7 +14,11 @@ public:
 	void Terminate();
 	// swaps gl buffers and polls events
 	void SwapBuffersAndPollEvents();
+	void GetHeightAndWidth(int* width, int* height);
+	float GetAspectRatio();
+	double GetDeltaTime();
 private:
+	double previousTime;
 	GLFWwindow* glfwWindow;
 	bool isValid;
 };

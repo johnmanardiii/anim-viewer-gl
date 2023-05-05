@@ -8,6 +8,7 @@
 
 // TODO: move into a "renderer" class
 #include "SimpleMesh.hpp"
+#include "Camera.hpp"
 
 int main() {
     // create list of updatable objects
@@ -24,20 +25,28 @@ int main() {
 
     // Launch the fbx loader thread
     FbxLoader fbxLoader{};
-    updatables.push_back(&fbxLoader);
 
     gui.SetFbxLoader(&fbxLoader);
 
+    Camera testCamera{};
+    testCamera.SetCameraAspect(window.GetAspectRatio());
     SimpleMesh testTriangle{};
+
+    updatables.push_back(&fbxLoader);
+    updatables.push_back(&testCamera);
+    updatables.push_back(&testTriangle);
 
     // Rendering Loop
     while (!window.ShouldClose()) {
+        // get time since last frame:
+        float dt = window.GetDeltaTime();
+
         // process input
 
         // update state
         for (auto updateable : updatables)
         {
-            updateable->Update();
+            updateable->Update(dt);
         }
 
         // process animation data
@@ -51,7 +60,7 @@ int main() {
         gui.DrawAnimViewerGUI();
 
         // draw models
-        testTriangle.Draw();
+        testTriangle.Draw(&testCamera);
 
         window.SwapBuffersAndPollEvents();
     }

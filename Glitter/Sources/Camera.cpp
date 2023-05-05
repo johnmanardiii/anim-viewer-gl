@@ -7,24 +7,22 @@ Camera::Camera()
 	LoadDefaultCamera();
 }
 
-
-
 void Camera::Update(float dt)
 {
-	P = glm::perspective(fovy, aspect, near, far);
-	V = glm::lookAt(position, lookAt, up);
+	P = glm::perspective(fovy, aspect, nearDist, farDist);
+	V = glm::lookAt(position, center, up);
 }
 
 void Camera::LoadDefaultCamera()
 {
 	// perspective matrix parameters
- 	fovy = 90.f;
- 	near = .1f;
-	far = 100.f;
+ 	fovy = glm::radians(90.0f);
+ 	nearDist = .1f;
+	farDist = 100.f;
 
 	// camera matrix parameters
-	position = glm::vec3(0.f, 0.f, -5.f);
-	lookAt = glm::vec3(0.f, 0.f, 0.f);
+	position = glm::vec3(0.f, 0.f, 5.f);
+	center = glm::vec3(0.f, 0.f, 0.f);
 	up = glm::vec3(0.f, 1.f, 0.f);
 }
 
@@ -32,8 +30,8 @@ void Camera::LoadDefaultCamera()
 	needs to be called whenever the window is resized
 	TODO: bind this to the window resize event
 */
-void Camera::SetCameraAspect(float aspect)
+void Camera::SetCameraAspect(float aspectTarget)
 {
-	this->aspect = aspect;
+	this->aspect = aspectTarget;
 }
 

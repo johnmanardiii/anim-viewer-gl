@@ -6,13 +6,15 @@
 #include "IUpdatable.hpp"
 #include <memory>
 
+class Camera;
+
 class SimpleMesh : public IUpdatable
 {
 public:
 	SimpleMesh();
 	~SimpleMesh();
-	void Draw();
-	void Update() override;
+	void Draw(Camera* camera);
+	void Update(float dt) override;
 
 private:
 	unsigned int m_VAO;

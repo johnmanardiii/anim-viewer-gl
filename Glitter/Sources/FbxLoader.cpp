@@ -196,7 +196,11 @@ void LoadFbxThread(ThreadSafeQueue<std::string>& fbxPathQueue, ThreadSafeQueue<s
 		ThreadSafeQueue<std::string>::PopResult fbxPath = fbxPathQueue.pop(flag);
 
 		// verify input of string here:
-		
+		if (!fbxPath.isValid)
+		{
+			std::cout << "FbxLoader thread interrupted and exiting..." << std::endl;
+			break;
+		}
 
 		// load the fbx file
 		std::cout << "Loading fbx file: " << fbxPath.result << std::endl;
@@ -234,7 +238,7 @@ FbxLoader::~FbxLoader()
 	m_fbxLoaderThread->join();	// wait for the fbx loader thread to finish
 }
 
-void FbxLoader::Update()
+void FbxLoader::Update(float dt)
 {
 	// check the "done" loading queue, if there is a model, add it to the render list
 

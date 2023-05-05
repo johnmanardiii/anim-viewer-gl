@@ -23,7 +23,7 @@ public:
 	FbxLoader();
 	~FbxLoader();
 
-	void Update() override;
+	void Update(float dt) override;
 	void LoadFbx(std::string FbxPath);
 private:
 	std::unique_ptr<std::thread> m_fbxLoaderThread;

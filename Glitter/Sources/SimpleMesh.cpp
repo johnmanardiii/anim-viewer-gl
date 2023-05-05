@@ -1,6 +1,7 @@
 #include "SimpleMesh.hpp"
 #include <glad/glad.h>
 #include <iostream>
+#include "Camera.hpp"
 
 SimpleMesh::SimpleMesh()
 {
@@ -46,13 +47,15 @@ SimpleMesh::~SimpleMesh()
 
 }
 
-void SimpleMesh::Draw()
+void SimpleMesh::Draw(Camera* camera)
 {
 	m_program->bind();
-	glm::mat4 identity = glm::mat4(1.f);
-	glUniformMatrix4fv(m_program->getUniform("P"), 1, GL_FALSE, &identity[0][0]);
-	glUniformMatrix4fv(m_program->getUniform("V"), 1, GL_FALSE, &identity[0][0]);
-	glUniformMatrix4fv(m_program->getUniform("M"), 1, GL_FALSE, &identity[0][0]);
+	glm::mat4 M = glm::mat4(1.f);
+	glm::mat4 V = camera->GetV();
+	glm::mat4 P = camera->GetP();
+	glUniformMatrix4fv(m_program->getUniform("M"), 1, GL_FALSE, &M[0][0]);
+	glUniformMatrix4fv(m_program->getUniform("V"), 1, GL_FALSE, &V[0][0]);
+	glUniformMatrix4fv(m_program->getUniform("P"), 1, GL_FALSE, &P[0][0]);
 
 	// draw the triangle manually here
 	glBindVertexArray(m_VAO);
@@ -61,7 +64,7 @@ void SimpleMesh::Draw()
 	m_program->unbind();
 }
 
-void SimpleMesh::Update()
+void SimpleMesh::Update(float dt)
 {
 
 }
