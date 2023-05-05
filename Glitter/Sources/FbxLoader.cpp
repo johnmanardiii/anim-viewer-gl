@@ -206,8 +206,19 @@ void LoadFbxThread(ThreadSafeQueue<std::string>& fbxPathQueue, ThreadSafeQueue<s
 		lResult = LoadScene(lSdkManager, lScene, lFilePath.Buffer());
 		
 		std::cout << "fbx file loaded" << std::endl;
+
+		// convert the fbx file to an animated model
+
+		// free memory allocated in fbx manager for loaded model after conversion
+
 	}
 	std::cout << "FbxLoader thread finished" << std::endl;
+
+	// destroy the fbx sdk manager
+	if (lSdkManager)
+	{
+		lSdkManager->Destroy();
+	}
 }
 
 FbxLoader::FbxLoader() : m_flag(true)

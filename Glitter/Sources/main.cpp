@@ -6,6 +6,9 @@
 #include "IUpdatable.hpp"
 #include <vector>
 
+// TODO: move into a "renderer" class
+#include "SimpleMesh.hpp"
+
 int main() {
     // create list of updatable objects
     std::vector<IUpdatable*> updatables;
@@ -24,6 +27,8 @@ int main() {
     updatables.push_back(&fbxLoader);
 
     gui.SetFbxLoader(&fbxLoader);
+
+    SimpleMesh testTriangle{};
 
     // Rendering Loop
     while (!window.ShouldClose()) {
@@ -44,6 +49,9 @@ int main() {
 		
         // draw GUI
         gui.DrawAnimViewerGUI();
+
+        // draw models
+        testTriangle.Draw();
 
         window.SwapBuffersAndPollEvents();
     }
